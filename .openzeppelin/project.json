@@ -3,7 +3,9 @@
   "contracts": {
     "LidSimplifiedPresale": "LidSimplifiedPresale",
     "LidSimplifiedPresaleRedeemer": "LidSimplifiedPresaleRedeemer",
-    "LidSimplifiedPresaleTimer": "LidSimplifiedPresaleTimer"
+    "LidSimplifiedPresaleTimer": "LidSimplifiedPresaleTimer",
+    "LidTimeLock": "LidTimeLock",
+    "LidTimeLockDao": "LidTimeLock"
   },
   "dependencies": {},
   "name": "lid-simplified-presale-contracts",
