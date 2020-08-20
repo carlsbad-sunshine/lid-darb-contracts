@@ -28,9 +28,8 @@ async function initialize(accounts,networkName) {
       timer.address,
       redeemer.address,
       presaleParams.token,
-      //TODO: FIX
-      "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
-      "0xb63c4F8eCBd1ab926Ed9Cb90c936dffC0eb02cE2"
+      presaleParams.uniswapRouter,
+      presaleParams.lidFund,
     )
 }
 

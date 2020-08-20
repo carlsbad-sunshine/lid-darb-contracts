@@ -1,0 +1,17 @@
+{
+  "manifestVersion": "2.2",
+  "contracts": {
+    "LidSimplifiedPresale": "LidSimplifiedPresale",
+    "LidSimplifiedPresaleRedeemer": "LidSimplifiedPresaleRedeemer",
+    "LidSimplifiedPresaleTimer": "LidSimplifiedPresaleTimer"
+  },
+  "dependencies": {},
+  "name": "lid-simplified-presale-contracts",
+  "version": "1.0.0",
+  "compiler": {
+    "manager": "truffle",
+    "compilerSettings": {
+      "optimizer": {}
+    }
+  }
+}
