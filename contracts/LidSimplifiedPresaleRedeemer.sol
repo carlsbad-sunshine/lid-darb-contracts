@@ -118,12 +118,11 @@ contract LidSimplifiedPresaleRedeemer is Initializable, Ownable {
     function calculateReedemable(
         address account,
         uint finalEndTime,
-        uint totalPresaleTokens,
-        uint hardCap
+        uint totalPresaleTokens
     ) external view returns (uint) {
         if (finalEndTime == 0) return 0;
         if (finalEndTime >= now) return 0;
-        uint earnedTokens = accountShares[account].mul(totalPresaleTokens).div(getMaxShares(hardCap));
+        uint earnedTokens = accountShares[account].mul(totalPresaleTokens).div(totalShares);
         uint claimedTokens = accountClaimedTokens[account];
         uint cycles = now.sub(finalEndTime).div(redeemInterval).add(1);
         uint totalRedeemable = earnedTokens.mulBP(redeemBP).mul(cycles);
