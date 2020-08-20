@@ -3,7 +3,7 @@ const { ether, BN } = require("@openzeppelin/test-helpers")
 let config = {}
 
 config.timer = {
-  startTime: 1597287540,
+  startTime: 1598065140,
   hardCapTimer: 172800,
   softCap: ether("750"),
 }
@@ -32,7 +32,8 @@ config.presale = {
   lidEthBP: 500,
   referralBP: 250,
   hardcap: ether("1500"),
-  token: "", //TODO: Insert token address
+  token: "0x1332d391f484834bc3285ac50dbb55e3eac47ac5",
+  lidFund: "0x0A54313F02AB43Cc6227DDDC6e26A967fF99b11C",
   uniswapTokenBP: 1700,
   presaleTokenBP: 4000,
   tokenDistributionBP: {

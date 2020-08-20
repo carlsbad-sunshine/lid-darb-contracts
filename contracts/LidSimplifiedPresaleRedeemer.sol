@@ -71,25 +71,25 @@ contract LidSimplifiedPresaleRedeemer is Initializable, Ownable {
     function setDeposit(address account, uint deposit, uint postDepositEth) external onlyPresaleContract {
         if (accountDeposits[account] == 0) totalDepositors = totalDepositors.add(1);
         accountDeposits[account] = accountDeposits[account].add(deposit);
+        uint sharesToAdd;
         if (currentBonusIndex.add(1) >= bonusRangeBP.length) {
             //final bonus rate
-            accountShares[account] = accountShares[account].add(deposit.addBP(bonusRangeBP[currentBonusIndex]));
+            sharesToAdd = deposit.addBP(bonusRangeBP[currentBonusIndex]);
         } else if (postDepositEth < bonusRangeStart[currentBonusIndex.add(1)]) {
             //Purchase doesnt push to next start
-            accountShares[account] = accountShares[account].add(deposit.addBP(bonusRangeBP[currentBonusIndex]));
+            sharesToAdd = deposit.addBP(bonusRangeBP[currentBonusIndex]);
         } else {
             //purchase straddles next start
             uint previousBonusBP = bonusRangeBP[currentBonusIndex];
             uint newBonusBP = bonusRangeBP[currentBonusIndex.add(1)];
             uint newBonusDeposit = postDepositEth.sub(bonusRangeStart[currentBonusIndex.add(1)]);
             uint previousBonusDeposit = deposit.sub(newBonusDeposit);
-            accountShares[account] = accountShares[account].add(
-                newBonusDeposit.addBP(newBonusBP)
-            ).add(
-                previousBonusDeposit.addBP(previousBonusBP)
-            );
+            sharesToAdd = newBonusDeposit.addBP(newBonusBP).add(
+                previousBonusDeposit.addBP(previousBonusBP));
             currentBonusIndex = currentBonusIndex.add(1);
         }
+        accountShares[account] = accountShares[account].add(sharesToAdd);
+        totalShares = totalShares.add(sharesToAdd);
     }
 
     function calculateRatePerEth(uint totalPresaleTokens, uint depositEth, uint hardCap) external view returns (uint) {
