@@ -175,7 +175,7 @@ contract LidSimplifiedPresale is Initializable, Ownable, ReentrancyGuard, Pausab
 
     function redeem() external whenPresaleFinished whenNotPaused {
         require(hasSentToUniswap, "Must have sent to Uniswap before any redeems.");
-        uint claimable = redeemer.calculateReedemable(msg.sender, timer.endTime(), totalTokens.mulBP(presaleTokenBP), hardcap);
+        uint claimable = redeemer.calculateReedemable(msg.sender, timer.endTime(), totalTokens.mulBP(presaleTokenBP));
         redeemer.setClaimed(msg.sender, claimable);
         token.transfer(msg.sender, claimable);
     }
