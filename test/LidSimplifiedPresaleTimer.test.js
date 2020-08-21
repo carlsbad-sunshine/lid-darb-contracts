@@ -42,11 +42,16 @@ describe("LidSimplifiedPresaleTimer", function() {
 
   describe("#updateEndTime", function() {
     it("should be now+timer with 0 softcap", async function() {
+      const presaleBalance = await balance.current(presale);
       await this.timer.updateEndTime()
       const result = await this.timer.endTime()
       const currentTime = await time.latest()
-      expect((new BN(result)).sub(currentTime).toString())
-      .to.equal(config.timer.hardCapTimer.toString())
+      if(presaleBalance >= config.timer.softCap) {
+        expect((new BN(result)).sub(currentTime).toString())
+        .to.equal(config.timer.hardCapTimer.toString())
+      } else {
+        expect(result.toString()).to.equal("0")
+      }
     })
   })
 
