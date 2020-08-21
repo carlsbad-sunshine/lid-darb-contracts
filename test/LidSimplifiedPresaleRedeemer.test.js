@@ -11,7 +11,7 @@ const depositors = [accounts[2], accounts[3], accounts[4]]
 
 const SECONDS_PER_HOUR = 3600
 const TOTAL_TOKENS = ether("1000000000")
-const PRESALE_TOKENS = ether("430000000")
+const PRESALE_TOKENS = ether("400000000")
 
 describe("LidSimplifiedPresaleRedeemer", function() {
   before(async function() {
@@ -27,51 +27,61 @@ describe("LidSimplifiedPresaleRedeemer", function() {
     )
   })
 
+  describe("#getMaxShares", function() {
+    it("should be 1612", async function () {
+      const maxShares = await this.redeemer.getMaxShares(
+        config.presale.hardcap
+      )
+      expect(maxShares.div(new BN(ether("1"))).toString())
+      .to.equal("1612")
+    })
+  })
+
   describe("#calculateRatePerEth", function() {
-    it("should be 454807 @ 0 eth", async function() {
+    it("should be 285271 @ 0 eth", async function() {
       const rate = await this.redeemer.calculateRatePerEth(
         PRESALE_TOKENS,
         ether("0"),
         config.presale.hardcap
       )
       expect(rate.div(new BN(ether("1"))).toString())
-      .to.equal("454807")
+      .to.equal("285271")
     })
-    it("should be 434134 @ 100 eth", async function() {
+    it("should be 272868 @ 250 eth", async function() {
       const rate = await this.redeemer.calculateRatePerEth(
         PRESALE_TOKENS,
-        ether("100"),
+        ether("250"),
         config.presale.hardcap
       )
       expect(rate.div(new BN(ether("1"))).toString())
-      .to.equal("434134")
+      .to.equal("272868")
     })
-    it("should be 423798 @ 500 eth", async function() {
+    it("should be 260465 @ 750 eth", async function() {
       const rate = await this.redeemer.calculateRatePerEth(
         PRESALE_TOKENS,
-        ether("500"),
+        ether("750"),
         config.presale.hardcap
       )
       expect(rate.div(new BN(ether("1"))).toString())
-      .to.equal("423798")
+      .to.equal("260465")
     })
-    it("should be 413461 @ 900 eth", async function() {
+    it("should be 248062 @ 1250 eth", async function() {
       const rate = await this.redeemer.calculateRatePerEth(
         PRESALE_TOKENS,
-        ether("900"),
+        ether("1250"),
         config.presale.hardcap
       )
       expect(rate.div(new BN(ether("1"))).toString())
-      .to.equal("413461")
+      .to.equal("248062")
     })
-    it("should be 413461 @ 999 eth", async function() {
+    it("should be 248062 @ 1499 eth", async function() {
       const rate = await this.redeemer.calculateRatePerEth(
         PRESALE_TOKENS,
-        ether("999"),
+        ether("1499"),
         config.presale.hardcap
       )
       expect(rate.div(new BN(ether("1"))).toString())
-      .to.equal("413461")
+      .to.equal("248062")
     })
   })
 
